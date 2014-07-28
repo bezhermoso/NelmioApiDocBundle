@@ -222,17 +222,22 @@ class SwaggerFormatter implements FormatterInterface
             $statusMessages = isset($data['statusCodes']) ? $data['statusCodes'] : array();
 
             foreach ($responseMap as $statusCode => $prop) {
-
                 if (isset($statusMessages[$statusCode])) {
                     $message = is_array($statusMessages[$statusCode]) ? implode('; ', $statusMessages[$statusCode]) : $statusCode[$statusCode];
                 } else {
                     $message = sprintf('See standard HTTP status code reason for %s', $statusCode);
                 }
 
+                if (isset($prop['type']['errors']) && $prop['type']['errors'] === true) {
+                    $model = $this->registerModel($prop['type']['class'] . '.FormErrors', $prop['model'], '', $models);
+                } else {
+                    $model = $this->registerModel($prop['type']['class'], $prop['model'], '', $models);
+                }
+
                 $responseModel = array(
                     'code' => $statusCode,
                     'message' => $message,
-                    'responseModel' => $this->registerModel($prop['type']['class'], $prop['model'], '', $models),
+                    'responseModel' => $model,
                 );
                 $responseMessages[$statusCode] = $responseModel;
             }
