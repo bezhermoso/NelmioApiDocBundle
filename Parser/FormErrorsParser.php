@@ -25,7 +25,7 @@ class FormErrorsParser implements ParserInterface, PostParserInterface
     }
 
     /**
-     * Overrides the root parameters to contain these instead:
+     * Overrides the root parameters to contain these parameters instead:
      *      - status_code: 400
      *      - message: "Validation failed"
      *      - errors: contains the original parameters, but all types are changed to array of strings (array of errors for each field)
@@ -104,11 +104,9 @@ class FormErrorsParser implements ParserInterface, PostParserInterface
                 $data[$name]['subType'] = sprintf('%s.FormErrors', $parameter['subType']);
                 $data[$name]['children']['children'] = $this->doPostParse($parameter['children'], $attachFieldErrors);
             } else {
-
                 if ($attachFieldErrors === false) {
                     unset($data[$name]['children']);
                 }
-
                 $attachFieldErrors = false;
             }
         }
