@@ -314,6 +314,7 @@ class SwaggerFormatter implements FormatterInterface
         }
 
         $apiDeclaration['models'] = $this->modelRegistry->getModels();
+        $this->modelRegistry->clear();
 
         return $apiDeclaration;
     }
