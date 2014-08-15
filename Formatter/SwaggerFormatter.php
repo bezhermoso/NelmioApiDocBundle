@@ -186,7 +186,6 @@ class SwaggerFormatter implements FormatterInterface
      */
     protected function produceApiDeclaration(array $collection, $resource)
     {
-
         $apiDeclaration = array(
             'swaggerVersion' => (string) $this->swaggerVersion,
             'apiVersion' => (string) $this->apiVersion,
@@ -412,7 +411,22 @@ class SwaggerFormatter implements FormatterInterface
                                 isset($prop['children']) ? $prop['children'] : null,
                                 $prop['description'] ?: $prop['dataType']
                             );
-                        break;
+                    break;
+
+                    case DataTypes::COLLECTION:
+                        $type = 'array';
+                        if ($prop['subType'] === DataTypes::MODEL) {
+                            $ref = $this->registerModel(
+                                $prop['subType'],
+                                isset($prop['children']) ? $prop['children'] : null,
+                                $prop['description'] ?: $prop['dataType']
+                            );
+                        } elseif (isset($this->typeMap[$prop['subType']])) {
+                            $items = $this->typeMap[$prop['subType']];
+                        } else {
+                            $items = 'string';
+                        }
+                    break;
                 }
             }
 
