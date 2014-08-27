@@ -153,6 +153,11 @@ class ApiDoc
     /**
      * @var array
      */
+    private $extras = array();
+
+    /**
+     * @var array
+     */
     private $tags = array();
 
     public function __construct(array $data)
@@ -270,6 +275,10 @@ class ApiDoc
             if (isset($this->responseMap[200])) {
                 $this->output = $this->responseMap[200];
             }
+        }
+
+        if (isset($data['extras'])) {
+            $this->extras = (array) $data['extras'];
         }
     }
 
@@ -570,7 +579,49 @@ class ApiDoc
     }
 
     /**
+     * @return array
+     */
+    public function getExtras()
+    {
+        return $this->extras;
+    }
+
+    /**
+     * @param array $extras
+     */
+    public function setExtras(array $extras)
+    {
+        $this->extras = $extras;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function setExtra($key, $value)
+    {
+        $this->extras[$key] = $value;
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return mixed
+     */
+    public function getExtra($key, $default = null)
+    {
+        if (!array_key_exists($key, $this->extras)) {
+            return $default;
+        }
+
+        return $this->extras[$key];
+    }
+
+    /**
      * @param boolean $deprecated
+     *
+     * @return $this
      */
     public function setDeprecated($deprecated)
     {
@@ -639,6 +690,10 @@ class ApiDoc
 
         if ($resourceDescription = $this->resourceDescription) {
             $data['resourceDescription'] = $resourceDescription;
+        }
+
+        if (!empty($this->extras)) {
+            $data['extras'] = $this->extras;
         }
 
         $data['https'] = $this->https;

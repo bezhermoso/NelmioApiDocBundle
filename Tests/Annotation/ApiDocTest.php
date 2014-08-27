@@ -30,6 +30,7 @@ class ApiDocTest extends TestCase
         $this->assertFalse(isset($array['description']));
         $this->assertFalse(isset($array['requirements']));
         $this->assertFalse(isset($array['parameters']));
+        $this->assertFalse(isset($array['extras']));
         $this->assertNull($annot->getInput());
         $this->assertFalse($array['authentication']);
         $this->assertTrue(is_array($array['authenticationRoles']));
@@ -371,5 +372,48 @@ class ApiDocTest extends TestCase
         $this->assertArrayHasKey(200, $map);
         $this->assertArrayHasKey(400, $map);
         $this->assertEquals($apiDoc->getOutput(), $map[200]);
+    }
+
+    public function testExtras()
+    {
+        $extras = array(
+            'foo' => true,
+            'bar' => range(1, 10),
+        );
+        $apiDoc = new ApiDoc(array(
+            'extras' => $extras,
+        ));
+
+        $this->assertEquals($extras, $apiDoc->getExtras());
+
+        $array = $apiDoc->toArray();
+        $this->assertArrayHasKey('extras', $array);
+        $this->assertEquals($extras, $array['extras']);
+    }
+
+    public function testExtras2()
+    {
+
+        $apiDoc = new ApiDoc(array(
+            'extras' => 'nelmio'
+        ));
+
+        $this->assertEquals(array('nelmio'), $apiDoc->getExtras());
+
+        $array = $apiDoc->toArray();
+        $this->assertArrayHasKey('extras', $array);
+        $this->assertEquals(array('nelmio'), $array['extras']);
+    }
+
+    public function testSetAndGetExtra()
+    {
+        $apiDoc = new ApiDoc(array());
+        $apiDoc->setExtra('nelmio', false);
+        $this->assertFalse($apiDoc->getExtra('nelmio'));
+        $this->assertEquals('default', $apiDoc->getExtra('santa', 'default'));
+
+        $array = $apiDoc->toArray();
+        $this->assertEquals(array('nelmio' => false), $array['extras']);
+
     }
 }
