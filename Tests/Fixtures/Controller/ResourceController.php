@@ -10,13 +10,16 @@
  */
 
 namespace Nelmio\ApiDocBundle\Tests\Fixtures\Controller;
+
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\ApiModel;
 
 class ResourceController 
 {
     /**
      * @ApiDoc(
      *      resource=true,
+     *      input=@ApiModel("test", {"foo"={"type"="string"}}),
      *      resourceDescription="Operations on resource.",
      *      description="List resources.",
      *      output="array<Nelmio\ApiDocBundle\Tests\Fixtures\Model\Test> as tests",
