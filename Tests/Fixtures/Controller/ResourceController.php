@@ -19,7 +19,6 @@ class ResourceController
     /**
      * @ApiDoc(
      *      resource=true,
-     *      input=@ApiModel("test", {"foo"={"type"="string"}}),
      *      resourceDescription="Operations on resource.",
      *      description="List resources.",
      *      output="array<Nelmio\ApiDocBundle\Tests\Fixtures\Model\Test> as tests",

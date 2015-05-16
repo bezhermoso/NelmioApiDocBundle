@@ -105,7 +105,7 @@ class FormErrorsParser implements ParserInterface, PostParserInterface
                         'actualType' => DataTypes::COLLECTION,
                         'subType' => 'string',
                         'required' => false,
-                        'dscription' => '',
+                        'description' => '',
                         'readonly' => true,
                     ),
                 ),

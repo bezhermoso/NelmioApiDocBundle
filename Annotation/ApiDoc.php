@@ -697,4 +697,12 @@ class ApiDoc
             $this->response = $model;
         }
     }
+
+    /**
+     * @param array $filters
+     */
+    public function setFilters(array $filters)
+    {
+        $this->filters = $filters;
+    }
 }

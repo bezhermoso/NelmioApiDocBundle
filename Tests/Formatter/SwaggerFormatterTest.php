@@ -188,12 +188,6 @@ class SwaggerFormatterTest extends WebTestCase
                                                                     1 => 'xml',
                                                                     2 => 'html',
                                                                 ),
-                                                            1 =>
-                                                                array (
-                                                                    'paramType' => 'form',
-                                                                    'type' => 'string',
-                                                                    'name' => 'foo',
-                                                                )
                                                         ),
                                                     1 =>
                                                         array(
@@ -208,6 +202,7 @@ class SwaggerFormatterTest extends WebTestCase
                                                             'name'      => 'b',
                                                             'type'      => 'number',
                                                             'format'    => 'float',
+                                                            'description' => '',
                                                         ),
                                                     3 =>
                                                         array(
@@ -227,6 +222,7 @@ class SwaggerFormatterTest extends WebTestCase
                                                             'name'      => 'd',
                                                             'type'      => 'string',
                                                             'format'    => 'date-time',
+                                                            'description' => '',
                                                         ),
                                                     5 =>
                                                         array(
@@ -234,12 +230,14 @@ class SwaggerFormatterTest extends WebTestCase
                                                             'name'      => 'e',
                                                             'type'      => 'string',
                                                             'format'    => 'date',
+                                                            'description' => '',
                                                         ),
                                                     6 =>
                                                         array(
                                                             'paramType' => 'form',
                                                             'name'      => 'g',
                                                             'type'      => 'string',
+                                                            'description' => '',
                                                         ),
                                                 ),
                                             'responseMessages' =>

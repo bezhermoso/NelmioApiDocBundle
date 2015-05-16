@@ -156,13 +156,6 @@ _List resources._
 
   - Requirement: json|xml|html
 
-#### Parameters ####
-
-foo:
-
-  * type: string
-  * required: false
-
 #### Response ####
 
 tests[]:
